@@ -2,7 +2,7 @@
 
 **Cloud & DevOps Engineer based in Nairobi, Kenya** 🇰🇪
 
-I design and run AWS infrastructure as code, ship CI/CD pipelines, and operate microservices on Kubernetes. IT student at Kisii University (BSc IT, 2024–2028).
+I design and run AWS infrastructure as code, ship CI/CD pipelines, and operate microservices on Kubernetes. 
 
 ## What I work on
 
@@ -21,9 +21,9 @@ I design and run AWS infrastructure as code, ship CI/CD pipelines, and operate m
 
 **Monitoring:** Prometheus, Grafana, CloudWatch
 
-**Languages & scripting:** Python, Bash, JavaScript, TypeScript, YAML, JSON
+**Languages & scripting:** Python, Bash, YAML, JSON
 
-**Backend & databases:** FastAPI, Node.js, React, Next.js, REST APIs, PostgreSQL, MySQL, SQLite, Redis
+**Backend & databases:** FastAPI, REST APIs, PostgreSQL, MySQL, SQLite, Redis
 
 **Operating systems:** Linux (Ubuntu), Windows Server
 
@@ -50,4 +50,4 @@ I design and run AWS infrastructure as code, ship CI/CD pipelines, and operate m
 
 ## Connect
 
-📫 jameswachira394@gmail.com
+📫 www.linkedin.com/in/james-wachira-105949402
