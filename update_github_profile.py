@@ -275,15 +275,23 @@ def build_streak_block(state):
     total    = state.get("total_days", 0)
     last     = state.get("last_push_date", "—")
 
-    # Flame emoji scale
+    # ── Flame / milestone scale ───────────────────────────────────────────────
+    # < 1 day  → frozen (no streak)
+    # 1–9 days → warming up 🔥
+    # 10–29    → ON FIRE 🔥🔥  (milestone: fire introduced at day 10)
+    # 30+      → LEGEND 🔥🔥🔥
     if current == 0:
         flame = "❄️"
-    elif current < 7:
+        milestone = ""
+    elif current < 10:
         flame = "🔥"
+        milestone = ""
     elif current < 30:
         flame = "🔥🔥"
+        milestone = "\n\n🔥 **You're on fire! 10+ day streak achieved!** 🔥"
     else:
         flame = "🔥🔥🔥"
+        milestone = "\n\n🔥🔥🔥 **LEGENDARY streak! 30+ days of consistent pushing!** 🔥🔥🔥"
 
     lines = [
         "## 🔥 Push Streak",
@@ -294,6 +302,12 @@ def build_streak_block(state):
         f"| 🏆 Longest streak | **{longest} day{'s' if longest != 1 else ''}** |",
         f"| 📅 Total push days | **{total}** |",
         f"| 🕐 Last push | **{last}** |",
+    ]
+
+    if milestone:
+        lines.append(milestone)
+
+    lines += [
         "",
         f"> Automatically updated by [update_github_profile.py](./update_github_profile.py)",
     ]

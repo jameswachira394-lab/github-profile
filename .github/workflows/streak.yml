@@ -1,0 +1,54 @@
+name: 🔥 Push Streak Tracker
+
+on:
+  push:
+    branches: ["**"]    # fires on every push to any branch
+  workflow_dispatch:    # allow manual runs from the GitHub UI
+
+permissions:
+  contents: write       # needed to commit streak.json + README back
+
+jobs:
+  update-streak:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout your profile repo ────────────────────────────────────────
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+        with:
+          # Use the special profile repo (username/username).
+          # If this workflow lives in a different repo, set:
+          #   repository: ${{ github.repository_owner }}/${{ github.repository_owner }}
+          #   token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0          # full history so git log works
+
+      # ── 2. Set up Python ─────────────────────────────────────────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # ── 3. Run the streak updater ─────────────────────────────────────────────
+      - name: Update streak
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python update_github_profile.py --streak --streak-readme README.md
+
+      # ── 4. Commit changes back (streak.json + README.md) ─────────────────────
+      - name: Commit streak data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add streak.json README.md
+
+          # Only commit when something actually changed
+          if git diff --cached --quiet; then
+            echo "Nothing changed – streak already up to date for today."
+          else
+            git commit -m "🔥 streak: update push streak [skip ci]"
+            git push
+          fi
