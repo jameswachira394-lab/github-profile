@@ -399,12 +399,15 @@ def main():
         else:
             print(f"README not found at {readme_for_streak}; skipping injection.")
 
-        # If --readme was also passed, push the updated README to GitHub
-        if args.readme:
+        # If --readme was also passed, push the updated README to GitHub via API.
+        # NOTE: When running in GitHub Actions, skip this — the workflow's git
+        # commit/push step already handles it, and the GITHUB_TOKEN cannot write
+        # to a different repo via the Contents API.
+        if args.readme and not os.environ.get("GITHUB_ACTIONS"):
             me = request("GET", "/user", token)
             update_readme(token, me["login"], readme_for_streak, args.dry_run)
-        elif args.streak:
-            # Auto-push when --streak is used (pull username we already fetched)
+        elif args.streak and not os.environ.get("GITHUB_ACTIONS"):
+            # Auto-push when --streak is used outside of GitHub Actions
             update_readme(token, username, readme_for_streak, args.dry_run)
 
         return   # streak-only run; skip profile field update below
