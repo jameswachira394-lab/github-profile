@@ -17,7 +17,7 @@ jobs:
       - name: Checkout profile repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT_SECRET }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0          # full history so git log works
 
       # ── 2. Set up Python ─────────────────────────────────────────────────────
