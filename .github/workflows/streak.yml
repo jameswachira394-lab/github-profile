@@ -17,11 +17,7 @@ jobs:
       - name: Checkout profile repo
         uses: actions/checkout@v4
         with:
-          # Use the special profile repo (username/username).
-          # If this workflow lives in a different repo, set:
-          #   repository: ${{ github.repository_owner }}/${{ github.repository_owner }}
-          #   token: ${{ secrets.GITHUB_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           fetch-depth: 0          # full history so git log works
 
       # ── 2. Set up Python ─────────────────────────────────────────────────────
@@ -33,7 +29,7 @@ jobs:
       # ── 3. Run the streak updater ─────────────────────────────────────────────
       - name: Update streak
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           python update_github_profile.py --streak --streak-readme README.md
 
