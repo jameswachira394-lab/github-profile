@@ -54,9 +54,9 @@ I design and run AWS infrastructure as code, ship CI/CD pipelines, and operate m
 | Metric | Value |
 |--------|-------|
 | ❄️ Current streak | **0 days** |
-| 🏆 Longest streak | **0 days** |
-| 📅 Total push days | **0** |
-| 🕐 Last push | **—** |
+| 🏆 Longest streak | **2 days** |
+| 📅 Total push days | **4** |
+| 🕐 Last push | **2026-11-25** |
 
 > Automatically updated by [update_github_profile.py](./update_github_profile.py)
 <!-- STREAK:END -->
